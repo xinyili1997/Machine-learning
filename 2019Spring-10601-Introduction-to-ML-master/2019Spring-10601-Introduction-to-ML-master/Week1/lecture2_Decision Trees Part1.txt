@@ -1,0 +1,82 @@
+Lecture2��
+	https://scs.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=a98c9dad-9d16-4f7e-b795-a9d100ff7fe1
+The main goal today(Lecture2) is to better formalize a learning, especially supervise learning.
+
+<1> FUNCTION APPROXIATION
+      1.1 How to approximation
+           #Implement a simple function which returns sin(x)
+	   - fit a serval points on sin(x) curve and do linear appoximation for it
+	   - maybe x ** 3 function
+	* The thing is we already now sin(x) function, so it's not hard to do approximation
+           #Medical diagnosis
+	   - make decisions for lab science, key area for ML
+	* EX. Medical diagonsis
+	   - expensive procedure
+	   - doctor decides y（{+, -} whethes to prescibe
+	   - based on attributes of patient {x1, x2, ... , xM}
+	   - M is the number of attributes, N is the number of instance (example)
+	   ---------------------------------------------------------
+	   Ambulence?   age   travel_internationally   bite_mark
+	   ---------------------------------------------------------
+	1         +         senior                Y                        Y
+	2         -          adult                 Y                        N
+	3         -          adult                 N                        Y
+	4         +         child                  N                       Y          
+      1.2 Formalize the function for learning  
+	* Problem Setting:
+	   - Set of possible inputs X
+	   - Set of possible outputs Y
+	   - Unknown target function c*: X--->Y
+	   - Set of canditc hypotheses H = {h|h: X--->Y}
+	* Input:
+	   - Training examples D = {(x_1, y_1), (x_2, y_2), ... , (x_N, y_N)}      #x_i is a vector and y_i is the output value
+		of unknown function c*, where y_i = c*(x_i)
+	* Output:
+	   - Hypothesis h（H that best approximates c*
+	   - loss function l: y * y = R
+		that measures how "bad" prediction
+			y^ = h(x) to y* = c*(x)
+	#example
+	   - Dataset: D = {1, 2, 3, 4}
+	   - vector x_1 = {senior, Y, Y}; x_2 = {adult, Y, N}; x_3 = {adult, N, Y}; x_4 = {child, N, Y};
+	   - y_i = {+, -, -, +}
+	   - M = 3 & N = 4
+	   - y_i <--------c*(x_i)---------- vector x_i
+      1.3  Loss function L
+	*[1] Regression - Y = R, y （ R  ---> especially for numerial problems
+		l(y^, y*) = (y^ - y*) ** 2           #"squared loss"
+	*[2] Classification - Y is a discrete set, y （ Y is discrete
+		l(y^, y*) = 0 if y^ = y*
+			1 otherwise             #"Zero-One loss"
+      1.4  Algorithm O: Memorizer
+		def train(D): store dataset D
+		def test(x):
+			if any of the i such that x = x(i) where x(i) （ D: return y(i)
+			else: pick y （ Y randomly, return y
+	* Q: Does memorization = learning?
+	   A: Yes, according to L1
+		def generalization:
+			which is what allows us to perform well on data points we have not seen.
+	* Q: Does memorization = generalization?
+	   A: No!
+      1.5 Definition of # of attribute types |x|
+	#example: Binary Attributes (Y/N questions)
+	   - if Q/A = 10, then |x| = 2 ** 10 = 1024
+	   - if Q/A = 100, then |x| = 2 ** 100 = 1.2 * 10^30
+	* only memorization is insufficient and ineffcient!!!
+
+WE SHOULD CREATE LEARNING ALGORITHM THAT CAN DO GENERALIZATION!!!
+
+<2> DECISION TREES
+      2.1 definition and how it is like
+	* h([x1, x2, ... , xM]) ---> Y
+      2.2 Algorithm1: "Dec Tree"
+	#Procede 1 ---> def train(D):
+			"Lecture 3"
+	#Procede 2 ---> def test(x):
+			----------------------------------------
+			<Decision Tree Prediction>
+			1. Internal node: test on attribute
+			2. branch: select value for attribute
+			3. leave node: return Y value of leave
+			-----------------------------------------

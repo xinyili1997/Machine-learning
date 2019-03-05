@@ -1,0 +1,67 @@
+Lecture1£º
+	https://scs.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=069fc5c7-f86f-4a28-8a7b-a9d100ff594f
+The main goal today(Lecture1) is to talk about how to formulate a problem so that we can solve it with ML.
+
+<1> WHAT IS MACHINE LEARNING?
+      1.1 The basic goal of AI is to develop intelligent machines
+           The sub goals are:
+	* Perception - perceive or be aware of the enviroment
+	* Reasoning -  like playing games
+	* Control/Motion/Manipulation - AI agent for robotic
+	* Planning 
+	* Communication - interactive like siri
+	* Creativity
+	* Learning - an agent that can react with the world dynamically #what we want
+      1.2 The goal of this course is to provide you with ML toolbox
+	* Machine Learning
+	* Statistics
+	* Probability
+	* Computer science
+	* Optimization
+            A good application is with ML with your own domain of interest!
+      1.3  The problems that had been solved with ML
+	* Speech Recognition - learning to recognize spoken words
+	* Robotics - learning to drive an autonomous vehicle
+	* Games / Reasoning - learning to beat the masters at board games # deep reinforcement learning
+	* Computer Vision - learning to classify imagines # a hidden Markov model
+	* Learning Theory - in what cases and how well can we learn?
+P17 TOPICS AND KEY QUESTIONS
+
+<2> DEFINING LEARNING PROBLEMS
+      2.1 Well-posed Learning Problems
+	* Three components <T, P, E>
+	   1. Task, T
+	   2. Performance measure, P
+	   3. Experience, E
+	* Definition of learning: 
+	   A computer program learns if its performance at tasks in T, as measured by P, improves with experience E.
+      #example: learning to beat the masters at chess
+	T = play chess; 
+	P = how many steps, score function, weighted move, ... ; 
+	E = learning from records, fighting with real componets, play with AI itself;
+      #example: respond to voice commands (siri)
+	* solution: Annotate Data and Learn
+	   1. Collect raw sentatences {x1, x2, ... , xn}
+                   2. Experts annotate their meaning {y1, y2, ... , yn}
+	T = predicting action from speech; 
+	P = percent of correct actions taken in user pilot study; 
+	E = examples pf (speech, action) pairs;
+      2.2 Problem Formulation
+	#what is the structure of our output prediction
+	  - regression: scores
+	  - density estimation: probability of fail
+	  - classification: decision
+
+<3> SYLLABUS HIGHLIGHTS
+      * Grading: 40% homework; 15% exam1; 15% exam2;  25% final exam; 5% participation
+	Midterm 1: evening, Thu, Feb. 21
+	Midterm 2: evening, Thu, Apr. 04
+	Final: TBD
+      * Homework: ~4 written(Gradescope) and ~5 programming(Autolab)
+      * hw1: Background
+	- Out: Wed, Jan 16 (2nd lecture)
+	- Due: Wed, Jan 23 at 11:59pm
+	- written + programming
+
+
+

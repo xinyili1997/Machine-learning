@@ -1,0 +1,106 @@
+# Lecture6：
+	https://scs.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=2ca4cc5e-6039-4ddc-beb8-a9ea016036aa
+The main goal (Lecture5) is to talk about how to learn from the "Geometry" to get W1, W2 or b for Perceptron.
+
+<1> Perceptron
+      1.1 Def. Vector Projection of a on b
+	* if ||b||_2 = 1:
+	   - vector(c) = (a*b)b
+	* if ||b||_2 ≠ 1
+	   - use normallized vector(b): b = b / ||b||_2
+	* [Summary] Def. Vector Projection
+	   - vector(c) = (a*b)b / ||b||_2
+      1.2 Online vs. Batch Learning
+            1.2.1 definitions
+	* Batch Learning: learn from all the examples at once
+	* Online Learning: gradually learn as each example is received
+	  #examples for online learning: 
+	     - stock market prediction, email classification, recommendation systems, ad placement, ...
+            1.2.2 online learning
+	* Progress
+	   For i = 1, 2, 3, ... :
+	   - Receive an unlabeled instance x(i);
+	   - Predict y' = h_θ(x(i))
+	   - Receive true label y(i)
+	   - Suffer Loss if a mistake was made, y' ≠ y(i)
+	   - Update parameters θ 
+	* Goal:
+	   - Minimize the number of mistakes
+
+<2> Perceptron Algorithm
+------------------------------------------------------------------------------------------------------------------------------------
+      2.1 (Online) Perceptron Algorithm
+	* Step[1]: Initialize parameters:
+	   - weights: vector(w) = [w1, w2, ... , wM]^T = vector(0) = [0, 0, ... , 0]
+	   - bias: b = 0
+	* Step[2]: Perceptron
+	   (1) receive instance, vector(x(i))
+	   (2) predict y^ = h(x(i)) = Sign(wX + b) ,where:
+		- if a >= 0: Sign(a) = +1
+		- if a < 0: Sign(a) = -1 
+	   (3) receive y(i), the true label
+	   (4) compare y(i) & y^:
+		- if positive mistake (y^ ≠ y(i) and y(i) = +1):
+			- weights: vector(w) = w + x(i)
+			- bias: b = b + 1
+		- if negative mistake (y^ ≠ y(i) and y(i) = -1):
+			- weights: vector(w) = w - x(i)
+			- bias: b = b - 1
+
+	************************
+	Perceptron Algorithm
+	************************
+	* Set t =1, start with all-zeros weight vector w1 and bias b.
+	* Given example x, predict positive iff (w_t*x + b) >= 0
+	* On a mistake, update as follows:
+		- None iff y(i) == y^(i)
+		- Mistake on positive iff y(i) > y^(i), update w_t+1 = w_t + x
+		- Mistake on positive iff y(i) < y^(i), update w_t+1 = w_t - x
+------------------------------------------------------------------------------------------------------------------------------------
+      2.2 Hypothesis Space
+	* Type of a hypothesis:
+	   - h: R^M ---> {+1, -1}
+	* All possible linear (hyperplane) separators:
+	   - H = {h(x)| def. vector(w) ∈ R^M and b ∈ R^M, such that h(x) = Sign(wx + b)}
+      2.3 Example
+	Loop#1: <parameter> weight(w) = [0 0]^T, bias(b) = 0
+		>>> y^(1) = Sign(0) = +1, y(1) = +1
+		>>> w and b stays constant
+	Loop#2: <parameter> weight(w) = [0 0]^T, bias(b) = 0
+		>>> y^(2) = Sign(0) = +1, y(2) = -1
+		>>> [Negative mistake]
+		>>> wight(w) = [0 0]^T - x(2), bias(b) = b - 1
+	Loop#3: ...
+      2.4 Questions
+            2.4.1 Why bias, what is bias?
+	* w^Tx + b, bias is the term to accomplish the mistake for w^Tx
+	* So that if decision boundary DB is:
+	   - shifter towards vector(w), b < 0
+	   - shifter "None", b = 0
+	   - shifter anri-towards vector(w), b > 0
+            2.4.2 Inductive bias for Perceptron
+	* Decision boundary should be linear
+	* Prefer to correct most recent mistakes
+
+<3> Summary
+      3.1 Background: hyperplane
+            - [a] definition1
+	* H = {x: w^Tx = b}
+            - [b] definition2
+	* H = {x: θ^Tx = 0 and x0 = 1}, where θ = [b, w1, w2, ... ,wM]^T
+            - [c] def. half-spaces:
+	* H^+ = {x: θ^Tx > 0 and x0 = 1}
+	* H^- = {x: θ^Tx < 0 and x0 = 1}
+      3.2 (Online) and (Batch) Perceptron Algorithm
+	* Online Perceptron Alg: i ∈ {1, 2, ...} unlimited for loop
+	* Batch Perceptron Alg: i ∈ {1, 2, ... , N} limited for loop
+	   >>> while not converge do:
+		for loop:
+	 	   predict: y^ = Sign(θ^Tx(i))
+		      if mistake: θ = θ ± y(i)x(i)
+	   >>> else: finish
+	   return θ
+      3.3 Discussion
+	* The Batch Perceptron Algorithm can be derived in 2 ways:
+	   [1] By extending Online to Batch setting (while loop for converage)
+	   [2] By applying Stochastic Gradient Descent (GSD) to minize a so called Hinge Loss on a linear separator
